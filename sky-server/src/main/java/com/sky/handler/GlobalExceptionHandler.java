@@ -37,7 +37,9 @@ public class GlobalExceptionHandler {
         log.error("异常信息：{}", ex.getMessage());
         String message = ex.getMessage();
         if (message.contains("Duplicate")) {
-            return Result.error(message.split(" ")[2]+ MessageConstant.ALREADY_EXIST);
+            //优化了一下，提示信息
+            return Result.error(message.split(" ")[2].replace("'", "") + MessageConstant.ALREADY_EXIST);
+
         }
         return Result.error(MessageConstant.UNKNOWN_ERROR);
     }
